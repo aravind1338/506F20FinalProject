@@ -2,11 +2,44 @@
 title: "Stats 506 F20 Final Project"
 author: "Aravind Mantravadi"
 date: "12/6/2020"
-output: html_document
+output: 
+  html_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+# 79: -------------------------------------------------------------------------
 ```
 
-## 
+# Question 
+
+Answering the question "Do people in the US get their macronutrient
+intake primarily at home or from elsewhere?
+
+# Dataset
+
+[The NHANES 2017-18 Nutrition Dataset](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Dietary&CycleBeginYear=2017)
+
+# Code
+
+The code for this project can be found 
+[here](https://github.com/aravind1338/506F20FinalProject)
+
+# Methodology
+
+Using the macronutrient variables for proteins, carbohydrates, 
+sugars, fibers and fats, I will find the estimate for average nutrient intake
+after splitting the source of the food into "home-cooked" and "outside"
+
+# Results
+
+TODO
+
+# TODO
+
+* The code to calculate the estimates is in code/final_proj.R, I need to actually plot the confidence intervals onto the markdown file
+
+* Need to write up the analysis in detail according to the project specifications
+
+
