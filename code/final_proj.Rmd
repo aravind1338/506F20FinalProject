@@ -8,8 +8,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
 # 79: -------------------------------------------------------------------------
+
 ```
 
 # Introduction
@@ -50,7 +52,19 @@ The code can be found [here](https://github.com/aravind1338/506F20FinalProject).
 
 # Results
 
-TODO
+```{r results, echo=FALSE, fig.width=15, fig.height=7}
+
+source('final_proj.R')
+
+knitr::kable(means, format = "html", 
+caption = "Macronutrient intake by source (grams). Format: 
+estimate (lower, upper)") %>%
+  kableExtra::kable_styling('striped', full_width = TRUE)
+
+```
+
+The results in the table above illuminate quite a few things: TODO
+
 
 # Conclusion/Discussion
 
@@ -59,7 +73,7 @@ TODO
 
 # TODO
 
-* The code to calculate the estimates is in code/final_proj.R, I need to actually plot the confidence intervals onto the markdown file
+* Need to expand upon the results and add another graphical/tabular element
 
 * Need to write up the conclusion in detail according to the project specifications
 
