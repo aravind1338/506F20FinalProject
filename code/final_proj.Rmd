@@ -1,7 +1,7 @@
 ---
 title: "Stats 506 F20 Final Project"
 author: "Aravind Mantravadi"
-date: "12/6/2020"
+date: "12/9/2020"
 output: 
   html_document:
     toc: true
@@ -12,34 +12,55 @@ knitr::opts_chunk$set(echo = FALSE)
 # 79: -------------------------------------------------------------------------
 ```
 
-# Question 
+# Introduction
 
-Answering the question "Do people in the US get their macronutrient
-intake primarily at home or from elsewhere?
+This project answers the question "do people in the US get their macronutrient
+intake primarily at home or from elsewhere?" Eating outside is often assumed to 
+be unhealthy, while home-cooked meals are supposed to provide a more nutritious 
+and balanced diet. What does this tell us about the macronutrient split based 
+on their source?
 
-# Dataset
+To analyze this, I used the NHANES 2017-18 Nutrition Dataset and the 2017-18 
+Demographics Dataset and gathered the variables that contained survey weights 
+macronutrient intake and the source of the nutrient. There are 28 different 
+sources of food and I manually classified them into "home-cooked" and 
+"outside". For more detail about the classification, refer to the 
+**Data/Methods** section. 
 
-[The NHANES 2017-18 Nutrition Dataset](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Dietary&CycleBeginYear=2017)
+Finally, I found the mean of each macronutrient along with a confidence 
+interval, split by the source of food. This gave me a way to compare the 
+average macronutrient intake by source.
 
-# Code
 
-The code for this project can be found 
-[here](https://github.com/aravind1338/506F20FinalProject)
+# Data/Methods
 
-# Methodology
+I used the
+[NHANES 2017-18 Nutrition Dataset](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Dietary&CycleBeginYear=2017) and the 
+[NHANES 2017-18 Demographic Dataset](https://wwwn.cdc.gov/nchs/nhanes/Search/DataPage.aspx?Component=Demographics&CycleBeginYear=2017)
 
-Using the macronutrient variables for proteins, carbohydrates, 
-sugars, fibers and fats, I will find the estimate for average nutrient intake
-after splitting the source of the food into "home-cooked" and "outside"
+
+For dataset manipulation, I used the **dplyr package** in tidyverse 
+collection of packages. I merged the two datasets and kept only the 
+variables of interest. Then, I manipultaed the source of food as 
+mentioned in the Introduction section and then used the functions 
+provided by the **survey package**, specifically **svydesign**, 
+**svyby** and **svymean** to conduct an analysis of the dataset. 
+The code can be found [here](https://github.com/aravind1338/506F20FinalProject).
+
 
 # Results
 
 TODO
 
+# Conclusion/Discussion
+
+TODO
+
+
 # TODO
 
 * The code to calculate the estimates is in code/final_proj.R, I need to actually plot the confidence intervals onto the markdown file
 
-* Need to write up the analysis in detail according to the project specifications
+* Need to write up the conclusion in detail according to the project specifications
 
 

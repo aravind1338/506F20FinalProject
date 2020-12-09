@@ -70,12 +70,13 @@ means = means %>% mutate(lower.proteins = proteins - se.proteins*statistic,
                          upper.fats = fats + se.fats*statistic)
 
 
+
 means %>%
-  ggplot(aes_string(x = "proteins", y = "test", color = "source")) +
+  ggplot(aes_string(x = "proteins", y = "group", color = "source")) +
   geom_point(position = position_dodge(width = 0.4)) +
   geom_errorbarh(aes_string(xmin = "lower.proteins", xmax = "upper.proteins"),
                  position = position_dodge(width = 0.4)) +
-  labs(x = "proteins", y = "idk") + 
+  labs(x = "proteins", y = "") + 
   scale_color_manual(values = c("limegreen", "skyblue"))
 
 
