@@ -50,17 +50,23 @@ provided by the **survey package**, specifically **svydesign**,
 The code can be found [here](https://github.com/aravind1338/506F20FinalProject).
 
 
+TODO: Explanation for home-cooked and outside
+
 # Results
 
 ```{r results, echo=FALSE, fig.width=15, fig.height=7}
 
 source('final_proj.R')
 
-knitr::kable(means, format = "html", 
-caption = "Macronutrient intake by source (grams). Format: 
-estimate (lower, upper)") %>%
-  kableExtra::kable_styling('striped', full_width = TRUE)
+barplot(food_weight$food_weight, names.arg = c("Home-cooked", "Outside"), 
+        col = "darkred", main = "Figure 1: Gram weight of food consumed", 
+        xlab = "Source", ylab = "Weight (grams)", 
+        ylim = range(pretty(c(0, food_weight$food_weight))))
 
+knitr::kable(macronutrients, format = "html", 
+caption = "Figure 2: Macronutrient intake by source (grams). Format: 
+estimate (lower, upper)") %>%
+  kableExtra::kable_styling('striped', full_width = TRUE) 
 ```
 
 The results in the table above illuminate quite a few things: TODO
@@ -72,6 +78,9 @@ TODO
 
 
 # TODO
+
+* Need to add an explanation for how I divided the codes 
+into "home-cooked" and "outside"
 
 * Need to expand upon the results and add another graphical/tabular element
 
