@@ -72,15 +72,12 @@ macronutrients = means %>%
          u.f = est_fibers + se.est_fibers*statistic, 
          l.fa = est_fats - se.est_fats*statistic, 
          u.fa = est_fats + se.est_fats*statistic, 
-         l.w = food_weight - se.food_weight*statistic, 
-         u.w = food_weight + se.food_weight*statistic,
          Proteins = sprintf('%4.1f (%4.1f, %4.1f)', est_proteins, l.p, u.p), 
          Carbohydrates = sprintf('%4.1f (%4.1f, %4.1f)', 
                                  est_carbohydrates, l.c, u.c), 
          Sugars = sprintf('%4.1f (%4.1f, %4.1f)', est_sugars, l.s, u.s), 
          Fibers = sprintf('%4.1f (%4.1f, %4.1f)', est_fibers, l.f, u.f), 
-         Fats = sprintf('%4.1f (%4.1f, %4.1f)', est_fats, l.fa, u.fa), 
-         Weight = sprintf('%4.1f (%4.1f, %4.1f)', food_weight, l.w, u.w)) %>%
+         Fats = sprintf('%4.1f (%4.1f, %4.1f)', est_fats, l.fa, u.fa)) %>%
   select(Source, Proteins, Carbohydrates, Sugars, Fibers, Fats, food_weight)
 
 

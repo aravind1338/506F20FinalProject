@@ -1,10 +1,11 @@
 ---
 title: "Stats 506 F20 Final Project"
 author: "Aravind Mantravadi"
-date: "12/9/2020"
+date: "12/11/2020"
 output: 
   html_document:
     toc: true
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -23,18 +24,18 @@ and balanced diet. What does this tell us about the macronutrient split based
 on their source?
 
 To analyze this, I used the NHANES 2017-18 Nutrition Dataset and the 2017-18 
-Demographics Dataset and gathered the variables that contained survey weights 
+Demographics Dataset and gathered the variables that contained survey weights, 
 macronutrient intake and the source of the nutrient. There are 28 different 
 sources of food and I manually classified them into "home-cooked" and 
 "outside". For more detail about the classification, refer to the 
-**Data/Methods** section. 
+**Data and Methods** section. 
 
-Finally, I found the mean of each macronutrient along with a confidence 
+Finally, I found the mean of each macronutrient along with a 95% confidence 
 interval, split by the source of food. This gave me a way to compare the 
 average macronutrient intake by source.
 
 
-# Data/Methods
+# Data and Methods
 
 I used the
 [NHANES 2017-18 Nutrition Dataset](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Dietary&CycleBeginYear=2017) and the 
@@ -43,14 +44,27 @@ I used the
 
 For dataset manipulation, I used the **dplyr package** in tidyverse 
 collection of packages. I merged the two datasets and kept only the 
-variables of interest. Then, I manipultaed the source of food as 
-mentioned in the Introduction section and then used the functions 
-provided by the **survey package**, specifically **svydesign**, 
-**svyby** and **svymean** to conduct an analysis of the dataset. 
-The code can be found [here](https://github.com/aravind1338/506F20FinalProject).
+variables of interest -- the survey weights, macronutrients, total 
+food intake and source of food. Then, I manipulated the source of food 
+as mentioned in the Introduction section and then used the functions 
+provided by the **survey package** to find the average of each 
+macronutrient for each source of food. The estimates are given with a 
+95% confidence interval and they take into account the survey weights.
 
 
-TODO: Explanation for home-cooked and outside
+The results were compared visually using tables and charts, and they 
+consist of a frequency table of the data, a table 
+of means for each macronutrient, and a bar graph showing the food intake 
+from the different sources. The code for this analysis can be found [here](https://github.com/aravind1338/506F20FinalProject).
+
+
+## Categorizing food source
+
+I manually categorized the food sources listed in the variable "DR1FS". I chose 
+to place codes 1, 10, 11, 12, 18, 19, 20 under "home-cooked" and the rest as 
+"outside". You can find detailed information about the codes [here](https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DR1IFF_J.htm#DR1FS)
+
+
 
 # Results
 
@@ -58,32 +72,68 @@ TODO: Explanation for home-cooked and outside
 
 source('final_proj.R')
 
+summary_stats = dataset %>% count(Source)
+knitr::kable(summary_stats, format = "html", 
+             col.names = c("Source", "Frequency"), 
+             caption = "Table 1: Frequency distribution of data by source") %>%
+  kableExtra::kable_styling('striped', full_width = TRUE)
+
 barplot(food_weight$food_weight, names.arg = c("Home-cooked", "Outside"), 
-        col = "darkred", main = "Figure 1: Gram weight of food consumed", 
+        col = "darkred", main = "Figure 1: Average gram weight of food 
+        consumed in a day", 
         xlab = "Source", ylab = "Weight (grams)", 
         ylim = range(pretty(c(0, food_weight$food_weight))))
 
+
 knitr::kable(macronutrients, format = "html", 
-caption = "Figure 2: Macronutrient intake by source (grams). Format: 
+caption = "Table 2: Average macronutrient intake by source (grams). Format: 
 estimate (lower, upper)") %>%
-  kableExtra::kable_styling('striped', full_width = TRUE) 
+  kableExtra::kable_styling('striped', full_width = TRUE)
 ```
 
-The results in the table above illuminate quite a few things: TODO
+The results in the tables and figures above illuminate quite a few things.
+
+1. From Table 2, we can see that people in the US **primarily** get their 
+macronutrient intake from home-cooked meals rather than outside sources. 
+But, one interesting exception is the split of fat consumed between 
+home-cooked and outside sources.
+
+2. Table 2 also shows us that the only macronutrient that people in the US 
+get from outside sources more than from home-cooked meals is fats.
+
+3. We can also see from Figure 1 that although there is more food consumed 
+from outside sources than home-cooked ones (on average), the difference 
+isn't extremely large. 
 
 
-# Conclusion/Discussion
+# Discussion
 
-TODO
+From the results above, we can conclude a couple of things:
+
+1. Result 2 would support the fact that the majority of food that is not 
+home-cooked is full of unhealthy trans fats.
+
+2. From result 3, we see that despite the difference, fats are the exception. 
+This might be an indicator of the imbalance in nutrients in outside food.
 
 
-# TODO
+## Strengths
 
-* Need to add an explanation for how I divided the codes 
-into "home-cooked" and "outside"
+* The analysis takes into account survey weights, which enables us to 
+expand the question to "all people in the US" rather than just the sample 
+population.
 
-* Need to expand upon the results and add another graphical/tabular element
+* The intuitive understanding of the composition of food from outside 
+sources is confirmed by the results, potentially indicating that how the 
+sources are classified is at the very least valid.
 
-* Need to write up the conclusion in detail according to the project specifications
+## Weaknesses
+
+* The classification of sources was subjective, based on my judgement of 
+the descriptions in the NHANES documentation. A different but still valid 
+interpretation could lead to different results.
+
+* Potential sources of confounding, like whether the data is representative 
+of the population (even with the survey weights)
 
 
